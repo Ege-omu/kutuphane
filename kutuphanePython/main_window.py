@@ -91,5 +91,5 @@ class MainWindow(QWidget):
         self.rapor_window.show()
 
     def open_dinamik(self):
-        self.dinamik_window = DinamikRaporWindow()
+        self.dinamik_window = DinamikRaporWindow(self.kullanici_id)
         self.dinamik_window.show()
