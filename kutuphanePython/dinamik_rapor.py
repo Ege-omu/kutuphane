@@ -18,11 +18,9 @@ class DinamikRaporWindow(QWidget):
         self.init_ui()
         self.kategorileri_doldur()
 
-    # ---------------- UI ----------------
     def init_ui(self):
         main = QVBoxLayout()
 
-        # --- FİLTRELER ---
         f = QHBoxLayout()
 
         self.txt_ad = QLineEdit()
@@ -53,7 +51,6 @@ class DinamikRaporWindow(QWidget):
         f.addWidget(self.chk_mevcut)
         f.addWidget(btn_ara)
 
-        # --- TABLO ---
         self.table = QTableWidget()
         self.table.setColumnCount(7)
         self.table.setHorizontalHeaderLabels([
@@ -61,7 +58,6 @@ class DinamikRaporWindow(QWidget):
             "Basım Yılı", "Toplam", "Mevcut"
         ])
 
-        # --- EXPORT ---
         btn_export = QPushButton("Excel'e Aktar")
         btn_export.clicked.connect(self.export_excel)
 
@@ -71,7 +67,6 @@ class DinamikRaporWindow(QWidget):
 
         self.setLayout(main)
 
-    # ---------------- KATEGORİ ----------------
     def kategorileri_doldur(self):
         conn = get_connection(self.kullanici_id)
         cur = conn.cursor()
@@ -83,7 +78,6 @@ class DinamikRaporWindow(QWidget):
         cur.close()
         conn.close()
 
-    # ---------------- DİNAMİK SORGU ----------------
     def sorgula(self):
         conn = get_connection(self.kullanici_id)
         cur = conn.cursor()
@@ -140,7 +134,6 @@ class DinamikRaporWindow(QWidget):
         cur.close()
         conn.close()
 
-    # ---------------- EXCEL ----------------
     def export_excel(self):
         path, _ = QFileDialog.getSaveFileName(
             self, "Kaydet", "", "CSV Files (*.csv)"
@@ -163,3 +156,4 @@ class DinamikRaporWindow(QWidget):
                 f.write(",".join(row) + "\n")
 
         QMessageBox.information(self, "Başarılı", "Excel dosyası oluşturuldu")
+
